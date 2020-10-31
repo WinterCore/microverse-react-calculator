@@ -1,10 +1,14 @@
 import React from 'react';
+
+import Display from './Components/Display';
 import './App.css';
+import ButtonPanel from './Components/ButtonPanel';
 
 function App() {
   return (
     <div className="App">
-      Hello World
+      <Display />
+      <ButtonPanel />
     </div>
   );
 }
