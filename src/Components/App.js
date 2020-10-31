@@ -1,15 +1,16 @@
 import React from 'react';
 
-import Display from './Components/Display';
+import Display from './Display';
+import ButtonPanel from './ButtonPanel';
+
 import './App.css';
-import ButtonPanel from './Components/ButtonPanel';
 
 function App() {
   return (
-    <div className="App">
+    <>
       <Display />
       <ButtonPanel />
-    </div>
+    </>
   );
 }
 
