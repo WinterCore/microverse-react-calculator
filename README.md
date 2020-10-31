@@ -27,7 +27,7 @@
 
 - Install Node.js
 - Clone this repository by running git clone `https://github.com/WinterCore/microverse-react-calculator.git`
-- Change your current working directory to the project `cd microverse-weather-app`
+- Change your current working directory to the project `cd microverse-react-calculator`
 - Run npm install
 - Run npm start
 - Enjoy
