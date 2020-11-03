@@ -2,6 +2,8 @@
 
 > A simple calculator implemented in React
 
+![screenshot](./screenshot.png)
+
 ## Table Of Contents
 
 - [Table Of Contents](#table-of-contents)
@@ -14,8 +16,6 @@
 - [Show your support](#show-your-support)
 - [Acknowledgments](#acknowledgments)
 - [License](#license)
-
-<!-- ![screenshot](./public/app-screenshot.gif) -->
 
 ## Built With
 
