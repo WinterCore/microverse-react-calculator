@@ -108,7 +108,7 @@ describe('Calculate', () => {
 
       const result = calculate(data, '+');
 
-      expect(result).toEqual(Object.assign(empty, { total: operate(data.next, data.total, data.operation), operation: '+' }));
+      expect(result).toEqual(Object.assign(empty, { next: operate(data.next, data.total, data.operation), operation: '+' }));
     });
 
     test('Changes the sign of the last used number when using the +/- sign', () => {

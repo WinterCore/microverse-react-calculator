@@ -37,9 +37,9 @@ const calculate = ({ total = null, next = null, operation = null }, button) => {
       }
     } else if (total && operation && next) {
       return {
-        total: operate(next, total, operation),
+        next: operate(next, total, operation),
         operation: button,
-        next: null,
+        total: null,
       };
     } else if (total && !next) {
       return {
