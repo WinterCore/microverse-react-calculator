@@ -7,6 +7,7 @@
 - [Table Of Contents](#table-of-contents)
 - [Built With](#built-with)
 - [How to run locally](#how-to-run-locally)
+- [Running tests](#running-tests)
 - [Live Demo](#live-demo)
 - [Authors](#authors)
 - [Contributing](#contributing)
@@ -31,6 +32,11 @@
 - Run npm install
 - Run npm start
 - Enjoy
+
+## Running tests
+
+- Use `npm run test -- --verbose` to run the unit tests with detailed output.
+- Use `npm run test -- --coverage` to run the unit tests and generate code coverage statistics.
  
 ## Live Demo 
 
