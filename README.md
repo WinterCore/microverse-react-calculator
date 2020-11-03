@@ -35,8 +35,8 @@
 
 ## Running tests
 
-- Use `npm run test -- --verbose` to run the unit tests with detailed output.
-- Use `npm run test -- --coverage` to run the unit tests and generate code coverage statistics.
+- Use `npm run test -- --verbose --watchAll=false` to run the unit tests with detailed output.
+- Use `npm run test -- --coverage --watchAll=false` to run the unit tests and generate code coverage statistics.
  
 ## Live Demo 
 
