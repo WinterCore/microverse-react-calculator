@@ -143,8 +143,8 @@ describe('Calculate', () => {
       const result3 = calculate(data3, '%');
 
       expect(result1).toEqual(empty);
-      expect(result2).toEqual(Object.assign(empty, data2));
-      expect(result3).toEqual(Object.assign(empty, data3, { total: '1.5' }));
+      expect(result2).toEqual(Object.assign(empty, { next: '0.11' }));
+      expect(result3).toEqual(Object.assign(empty, data3, { total: '0.15' }));
     });
   });
 

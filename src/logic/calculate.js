@@ -31,12 +31,16 @@ const calculate = ({ total = null, next = null, operation = null }, button) => {
     if (button === '+/-') {
       if (total) {
         return { operation, next, total: operate(total, '-1', 'x') };
-      } if (next) {
+      }
+      if (next) {
         return { next: operate(next, '-1', 'x'), total: null, operation: null };
       }
     } else if (button === '%') {
       if (total) {
-        return { next, operation, total: operate(next, operate(total, '100', '÷'), 'x') };
+        return { next, operation, total: operate(total, '100', '÷') };
+      }
+      if (next) {
+        return { next: operate(next, '100', '÷'), operation, total };
       }
     } else if (total && operation && next) {
       return {
