@@ -10,11 +10,11 @@ describe('Operate', () => {
     expect(result).toEqual((num1 + num2).toString());
   });
 
-  test('Multiplies two numbers when provided with the multiplication sign (X)', () => {
+  test('Multiplies two numbers when provided with the multiplication sign (x)', () => {
     const num1 = 1;
     const num2 = 2;
 
-    const result = operate(num1, num2, 'X');
+    const result = operate(num1, num2, 'x');
 
     expect(result).toEqual((num1 * num2).toString());
   });
