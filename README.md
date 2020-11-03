@@ -2,6 +2,8 @@
 
 > A simple calculator implemented in React
 
+![screenshot](./screenshot.png)
+
 ## Table Of Contents
 
 - [Table Of Contents](#table-of-contents)
@@ -14,8 +16,6 @@
 - [Show your support](#show-your-support)
 - [Acknowledgments](#acknowledgments)
 - [License](#license)
-
-<!-- ![screenshot](./public/app-screenshot.gif) -->
 
 ## Built With
 
@@ -35,8 +35,8 @@
 
 ## Running tests
 
-- Use `npm run test -- --verbose` to run the unit tests with detailed output.
-- Use `npm run test -- --coverage` to run the unit tests and generate code coverage statistics.
+- Use `npm run test -- --verbose --watchAll=false` to run the unit tests with detailed output.
+- Use `npm run test -- --coverage --watchAll=false` to run the unit tests and generate code coverage statistics.
  
 ## Live Demo 
 

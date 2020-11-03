@@ -38,20 +38,20 @@ describe('Calculate', () => {
       expect(result).toEqual(Object.assign(empty, { next: '1231' }));
     });
 
-    test('Ignores zeroes at the start (when next is empty)', () => {
-      const data = {};
-
-      const result = calculate(data, '0');
-
-      expect(result).toEqual(empty);
-    });
-
     test('Sets total to the specified digit when next & operation are filled and total is empty', () => {
       const data = { next: '1', operation: '+' };
 
       const result = calculate(data, '1');
 
       expect(result).toEqual(Object.assign(data, { total: '1' }));
+    });
+
+    test('Clear everything if there\'s an error and handle the next button correctly', () => {
+      const data = calculate({ next: '1', operation: '÷', total: '0' }, '+');
+
+      const result = calculate(data, '3');
+
+      expect(result).toEqual(Object.assign(empty, { next: '3' }));
     });
 
     test('Sets total to the specified digit when next & operation are filled and total contains digits', () => {
@@ -89,6 +89,14 @@ describe('Calculate', () => {
   });
 
   describe('Handle operations', () => {
+    test('Moves the result from total to next when entering a sign after using equals', () => {
+      const data = calculate({ total: '1', operation: '+', next: '1' }, '=');
+
+      const result = calculate(data, '-');
+
+      expect(result).toEqual(Object.assign(empty, { next: '2', operation: '-' }));
+    });
+
     test('Ignores an operation when next & total are empty', () => {
       const result = calculate({}, '+');
 
@@ -121,8 +129,8 @@ describe('Calculate', () => {
       const result3 = calculate(data3, '+/-');
 
       expect(result1).toEqual(empty);
-      expect(result2).toEqual(Object.assign(empty, { next: operate(data2.next, '-1', 'X') }));
-      expect(result3).toEqual(Object.assign(empty, data3, { total: operate(data3.total, '-1', 'X') }));
+      expect(result2).toEqual(Object.assign(empty, { next: operate(data2.next, '-1', 'x') }));
+      expect(result3).toEqual(Object.assign(empty, data3, { total: operate(data3.total, '-1', 'x') }));
     });
 
     test('Calculates the result when using the percentage (%) sign correctly', () => {
@@ -135,8 +143,8 @@ describe('Calculate', () => {
       const result3 = calculate(data3, '%');
 
       expect(result1).toEqual(empty);
-      expect(result2).toEqual(Object.assign(empty, data2));
-      expect(result3).toEqual(Object.assign(empty, data3, { total: '1.5' }));
+      expect(result2).toEqual(Object.assign(empty, { next: '0.11' }));
+      expect(result3).toEqual(Object.assign(empty, data3, { total: '0.15' }));
     });
   });
 
