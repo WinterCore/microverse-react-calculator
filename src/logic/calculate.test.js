@@ -2,6 +2,12 @@ import calculate from './calculate';
 import operate from './operate';
 
 describe('Calculate', () => {
+  let empty;
+
+  beforeEach(() => {
+    empty = { next: null, operation: null, total: null };
+  });
+
   describe('Clearing (Using the AC button)', () => {
     test('Clears everything when AC is used', () => {
       const data1 = { next: '1', operation: '+' };
@@ -10,8 +16,8 @@ describe('Calculate', () => {
       const result1 = calculate(data1, 'AC');
       const result2 = calculate(data2, 'AC');
 
-      expect(result1).toEqual({});
-      expect(result2).toEqual({});
+      expect(result1).toEqual(empty);
+      expect(result2).toEqual(empty);
     });
   });
 
@@ -21,7 +27,7 @@ describe('Calculate', () => {
 
       const result = calculate(data, '1');
 
-      expect(result).toEqual({ next: '1' });
+      expect(result).toEqual(Object.assign(empty, { next: '1' }));
     });
 
     test('Appends the specified digit to next when next already contains other digits', () => {
@@ -29,7 +35,7 @@ describe('Calculate', () => {
 
       const result = calculate(data, '1');
 
-      expect(result).toEqual({ next: '1231' });
+      expect(result).toEqual(Object.assign(empty, { next: '1231' }));
     });
 
     test('Ignores zeroes at the start (when next is empty)', () => {
@@ -37,7 +43,7 @@ describe('Calculate', () => {
 
       const result = calculate(data, '0');
 
-      expect(result).toEqual({});
+      expect(result).toEqual(empty);
     });
 
     test('Sets total to the specified digit when next & operation are filled and total is empty', () => {
@@ -75,10 +81,10 @@ describe('Calculate', () => {
       const result3 = calculate(data3, '.');
       const result4 = calculate(data4, '.');
 
-      expect(result1).toEqual({ next: '.' });
-      expect(result2).toEqual({ next: '1.' });
-      expect(result3).toEqual({ next: '1.1' });
-      expect(result4).toEqual({ next: '.1' });
+      expect(result1).toEqual(Object.assign(empty, { next: '.' }));
+      expect(result2).toEqual(Object.assign(empty, { next: '1.' }));
+      expect(result3).toEqual(Object.assign(empty, { next: '1.1' }));
+      expect(result4).toEqual(Object.assign(empty, { next: '.1' }));
     });
   });
 
@@ -86,7 +92,7 @@ describe('Calculate', () => {
     test('Ignores an operation when next & total are empty', () => {
       const result = calculate({}, '+');
 
-      expect(result).toEqual({});
+      expect(result).toEqual(empty);
     });
 
     test('Sets the operation when next is not empty but total is empty', () => {
@@ -94,15 +100,15 @@ describe('Calculate', () => {
 
       const result = calculate(data, '+');
 
-      expect(result).toEqual(Object.assign(data, { operation: '+' }));
+      expect(result).toEqual(Object.assign(empty, data, { operation: '+' }));
     });
 
-    test('Sets next to the result & sets the provided operation if next, operation & total are not empty', () => {
+    test('Sets total to the result & sets the provided operation if next, operation & total are not empty', () => {
       const data = { next: '1', operation: '-', total: '2' };
 
       const result = calculate(data, '+');
 
-      expect(result).toEqual({ next: operate(data.next, data.total, data.operation), operation: '+' });
+      expect(result).toEqual(Object.assign(empty, { next: operate(data.next, data.total, data.operation), operation: '+' }));
     });
 
     test('Changes the sign of the last used number when using the +/- sign', () => {
@@ -114,9 +120,9 @@ describe('Calculate', () => {
       const result2 = calculate(data2, '+/-');
       const result3 = calculate(data3, '+/-');
 
-      expect(result1).toEqual({});
-      expect(result2).toEqual({ next: operate(data2.next, '-1', 'X') });
-      expect(result3).toEqual(Object.assign(data3, { total: operate(data3.total, '-1', 'X') }));
+      expect(result1).toEqual(empty);
+      expect(result2).toEqual(Object.assign(empty, { next: operate(data2.next, '-1', 'X') }));
+      expect(result3).toEqual(Object.assign(empty, data3, { total: operate(data3.total, '-1', 'X') }));
     });
 
     test('Calculates the result when using the percentage (%) sign correctly', () => {
@@ -128,9 +134,9 @@ describe('Calculate', () => {
       const result2 = calculate(data2, '%');
       const result3 = calculate(data3, '%');
 
-      expect(result1).toEqual({});
-      expect(result2).toEqual(data2);
-      expect(result3).toEqual(Object.assign(data3, { total: '1.5' }));
+      expect(result1).toEqual(empty);
+      expect(result2).toEqual(Object.assign(empty, data2));
+      expect(result3).toEqual(Object.assign(empty, data3, { total: '1.5' }));
     });
   });
 
@@ -144,9 +150,9 @@ describe('Calculate', () => {
       const result2 = calculate(data2, '=');
       const result3 = calculate(data3, '=');
 
-      expect(result1).toEqual(data1);
-      expect(result2).toEqual(data2);
-      expect(result3).toEqual(data3);
+      expect(result1).toEqual(Object.assign(empty, data1));
+      expect(result2).toEqual(Object.assign(empty, data2));
+      expect(result3).toEqual(Object.assign(empty, data3));
     });
 
     test('Calculate the result if total, operation & next are filled', () => {
@@ -154,7 +160,7 @@ describe('Calculate', () => {
 
       const result = calculate(data, '=');
 
-      expect(result.next).toEqual(operate(data.next, data.total, data.operation));
+      expect(result.total).toEqual(operate(data.next, data.total, data.operation));
     });
   });
 });
